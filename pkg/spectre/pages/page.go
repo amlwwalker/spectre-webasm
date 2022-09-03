@@ -4,7 +4,6 @@ import (
 	"amlwwalker/go-app-tuts/pkg/markdown"
 	"amlwwalker/go-app-tuts/pkg/spectre/components"
 	"amlwwalker/go-app-tuts/pkg/spectre/layouts"
-	"fmt"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 
@@ -12,15 +11,10 @@ type page struct {
 	app.Compo
 }
 
-func (p *page) OnMount(ctx app.Context) {
-	defer func() {
-		fmt.Println("calling prism highlight all")
-			app.Window().Get("Prism").Call("highlightAll")
-	}()
-}
 func (p *page) Render() app.UI {
 	return app.Span()
 }
+
 // Page
 func Page(title, description, src string, body ...app.UI) app.HTMLDiv {
 	return app.Div().Class("container").Body(
@@ -42,4 +36,3 @@ func Page(title, description, src string, body ...app.UI) app.HTMLDiv {
 		&page{},
 	)
 }
-

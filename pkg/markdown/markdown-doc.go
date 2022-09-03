@@ -2,12 +2,11 @@ package markdown
 
 import (
 	"fmt"
-	"path/filepath"
-
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/parser"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 	"github.com/maxence-charriere/go-app/v9/pkg/ui"
+	"path/filepath"
 )
 
 type markdownDoc struct {
@@ -41,10 +40,6 @@ func (d *markdownDoc) OnMount(ctx app.Context) {
 	ctx.Defer(d.highlightCode)
 }
 
-func (d *markdownDoc) OnUpdate(ctx app.Context) {
-	ctx.Defer(d.highlightCode)
-}
-
 func (d *markdownDoc) Render() app.UI {
 	return app.Div().
 		ID(d.Iid).
@@ -55,7 +50,7 @@ func (d *markdownDoc) Render() app.UI {
 }
 
 func (d *markdownDoc) highlightCode(ctx app.Context) {
-	//app.Window().Get("Prism").Call("highlightAll")
+	app.Window().Get("Prism").Call("highlightAll")
 }
 
 func parseMarkdown(md []byte) []byte {

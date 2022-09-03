@@ -24,18 +24,18 @@ func (h *homePage) Render() app.UI {
 	return app.Div().Class("container").Body(
 		layouts.NavBar(),
 		layouts.SideBar(
-				components.Accordion(
-					components.AccordionMenu("getting-started", "Getting Started", []string{"Installation", "Custom Version", "Browser-Support"}),
-					components.AccordionMenu("elements", "Elements", []string{"Typography", "Tables", "Buttons", "Forms", "Icons.css", "Labels", "Code", "Media"}),
-					components.AccordionMenu("layouts", "Layouts", []string{"Flexbox grid", "Responsive", "Hero", "Navbar"}),
-					components.AccordionMenu("components", "Components", []string{"Accordions", "Avatars", "Badges", "Bars", "Breadcrumbs", "Cards", "Chips", "Empty States", "Menu", "Modals", "Nav", 				"Pagination", "Panels", "Popovers", "Steps", "Tabs", "Tiles", "Toasts", "Tooltips"}),
-				),
-				app.Div().Class("docs-content").Class("content").Body(
-			//components.Hero("Spectre (wasm)", "Using the Spectre css library in wasm with Go!"),
-			layouts.MediaHero("Spectre (wasm)", "Using the Spectre css library in wasm with Go!", "cbB3QEwWMlA"),
-			//markdown.NewRemoteMarkdownDoc().Src("/web/documents/home.md"),
-			components.Steps(),
-		),
+			components.Accordion(
+				components.AccordionMenu("getting-started", "Getting Started", []string{"Installation", "Custom Version", "Browser-Support"}),
+				components.AccordionMenu("elements", "Elements", []string{"Typography", "Tables", "Buttons", "Forms", "Icons.css", "Labels", "Code", "Media"}),
+				components.AccordionMenu("layouts", "Layouts", []string{"Flexbox grid", "Responsive", "Hero", "Navbar"}),
+				components.AccordionMenu("components", "Components", []string{"Accordions", "Avatars", "Badges", "Bars", "Breadcrumbs", "Cards", "Chips", "Empty States", "Menu", "Modals", "Nav", "Pagination", "Panels", "Popovers", "Steps", "Tabs", "Tiles", "Toasts", "Tooltips"}),
+			),
+			app.Div().Class("docs-content").Class("content").Body(
+				//components.Hero("Spectre (wasm)", "Using the Spectre css library in wasm with Go!"),
+				layouts.MediaHero("Spectre (wasm)", "Using the Spectre css library in wasm with Go!", "cbB3QEwWMlA"),
+				//markdown.NewRemoteMarkdownDoc().Src("/web/documents/home.md"),
+				components.Steps(),
+			),
 		),
 		components.Toast("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "warning", true, true),
 	)
@@ -54,7 +54,6 @@ func main() {
 	app.Route("/getting-started/customVersion", &getting_started.CustomVersionPage{})
 
 	app.Route("/layouts/hero", &page_layouts.HeroPage{})
-
 
 	app.Route("/components/modals", &spectre_components.ModalPage{})
 	app.Route("/components/badges", &spectre_components.BadgePage{})
@@ -83,7 +82,6 @@ func main() {
 	// When executed on the server-side, RunWhenOnBrowser() does nothing, which
 	// lets room for server implementation without the need for precompiling
 	// instructions.
-	app.Window().Get("Prism").Call("highlightAll")
 	app.RunWhenOnBrowser()
 
 	// Finally, launching the server that serves the app is done by using the Go
@@ -95,7 +93,7 @@ func main() {
 	http.Handle("/", &app.Handler{
 		Name:        "Hello",
 		Description: "An Hello World! example",
-			Styles: []string{
+		Styles: []string{
 			"/web/css/spectre/spectre.min.css", // Loads hello.css file.
 			"/web/css/spectre/spectre-exp.min.css",
 			"/web/css/spectre/spectre-icons.min.css",
@@ -103,7 +101,7 @@ func main() {
 			"/web/css/popover-styles.css",
 			"/web/css/prism.css",
 		},
-		RawHeaders: []string{`<script src="/web/js/prism.js" data-manual></script>`},
+		RawHeaders:         []string{`<script src="/web/js/prism.js" data-manual></script>`},
 		CacheableResources: []string{"/web/js/prism.js"},
 	})
 
