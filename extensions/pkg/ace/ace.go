@@ -1,7 +1,7 @@
 package ace
 
 import (
-	"amlwwalker/spectre-golang-webasm/pkg/spectre/components"
+	"github.com/amlwwalker/spectre-webasm/pkg/spectre/components"
 	"fmt"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )

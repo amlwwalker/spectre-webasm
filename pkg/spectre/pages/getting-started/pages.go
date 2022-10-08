@@ -1,7 +1,7 @@
 package getting_started
 
 import (
-	pages "amlwwalker/spectre-golang-webasm/pkg/spectre/pages"
+	pages "github.com/amlwwalker/spectre-webasm/pkg/spectre/pages"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 

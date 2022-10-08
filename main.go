@@ -1,13 +1,13 @@
 package main
 
 import (
-	"amlwwalker/spectre-golang-webasm/pkg/markdown"
-	"amlwwalker/spectre-golang-webasm/pkg/spectre/components"
-	"amlwwalker/spectre-golang-webasm/pkg/spectre/layouts"
-	spectre_components "amlwwalker/spectre-golang-webasm/pkg/spectre/pages/components"
-	"amlwwalker/spectre-golang-webasm/pkg/spectre/pages/elements"
-	getting_started "amlwwalker/spectre-golang-webasm/pkg/spectre/pages/getting-started"
-	page_layouts "amlwwalker/spectre-golang-webasm/pkg/spectre/pages/layouts"
+	"github.com/amlwwalker/spectre-webasm/pkg/markdown"
+	"github.com/amlwwalker/spectre-webasm/pkg/spectre/components"
+	"github.com/amlwwalker/spectre-webasm/pkg/spectre/layouts"
+	spectre_components "github.com/amlwwalker/spectre-webasm/pkg/spectre/pages/components"
+	"github.com/amlwwalker/spectre-webasm/pkg/spectre/pages/elements"
+	getting_started "github.com/amlwwalker/spectre-webasm/pkg/spectre/pages/getting-started"
+	page_layouts "github.com/amlwwalker/spectre-webasm/pkg/spectre/pages/layouts"
 	"log"
 	"net/http"
 

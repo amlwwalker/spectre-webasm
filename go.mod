@@ -1,4 +1,4 @@
-module amlwwalker/spectre-golang-webasm
+module github.com/amlwwalker/spectre-webasm
 
 go 1.18
 

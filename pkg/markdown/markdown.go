@@ -1,7 +1,7 @@
 package markdown
 
 import (
-	"amlwwalker/spectre-golang-webasm/pkg/http"
+	"github.com/amlwwalker/spectre-webasm/pkg/http"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 	"github.com/maxence-charriere/go-app/v9/pkg/errors"
 )

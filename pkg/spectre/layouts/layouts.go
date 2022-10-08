@@ -1,7 +1,7 @@
 package layouts
 
 import (
-	"amlwwalker/spectre-golang-webasm/pkg/media"
+	"github.com/amlwwalker/spectre-webasm/pkg/media"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 
