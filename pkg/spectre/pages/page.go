@@ -1,9 +1,9 @@
 package components
 
 import (
-	"amlwwalker/go-app-tuts/pkg/markdown"
-	"amlwwalker/go-app-tuts/pkg/spectre/components"
-	"amlwwalker/go-app-tuts/pkg/spectre/layouts"
+	"amlwwalker/spectre-golang-webasm/pkg/markdown"
+	"amlwwalker/spectre-golang-webasm/pkg/spectre/components"
+	"amlwwalker/spectre-golang-webasm/pkg/spectre/layouts"
 	"fmt"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )

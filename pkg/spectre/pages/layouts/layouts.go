@@ -1,8 +1,8 @@
 package page_layouts
 
 import (
-	"amlwwalker/go-app-tuts/pkg/spectre/layouts"
-	pages "amlwwalker/go-app-tuts/pkg/spectre/pages"
+	"amlwwalker/spectre-golang-webasm/pkg/spectre/layouts"
+	pages "amlwwalker/spectre-golang-webasm/pkg/spectre/pages"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 

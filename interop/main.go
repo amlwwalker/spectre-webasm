@@ -1,11 +1,5 @@
 package main
 
-import (
-	"syscall/js"
-	//"amlwwalker/go-app-tuts/pkg/spectre/layouts"
-	//"github.com/maxence-charriere/go-app/v9/pkg/app"
-)
-
 var icons = []string{
 	"icon-cross",
 	"icon-check",

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"amlwwalker/go-app-tuts/extensions/pkg/ace"
-	"amlwwalker/go-app-tuts/pkg/markdown"
-	"amlwwalker/go-app-tuts/pkg/spectre/layouts"
+	"amlwwalker/spectre-golang-webasm/extensions/pkg/ace"
+	"amlwwalker/spectre-golang-webasm/pkg/markdown"
+	"amlwwalker/spectre-golang-webasm/pkg/spectre/layouts"
 	"fmt"
 	"log"
 	"net/http"
