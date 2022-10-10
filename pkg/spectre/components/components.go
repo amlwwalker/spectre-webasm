@@ -130,14 +130,16 @@ func FigureBadge(figureSrc string, dataBadge int, onClick func(ctx app.Context, 
   </div>
 </div>
  */
-func Card(title, subTitle, src string, body app.UI, footer app.UI) app.HTMLDiv {
+func Card(title, body app.UI, subTitle []app.UI, src string, footer app.UI) app.HTMLDiv {
 	return app.Div().Class("card").Body(
 		app.Div().Class("card-image").Body(
 			app.Img().Src(src).Class("img-responsive"),
 		),
 		app.Div().Class("card-header").Body(
-			app.Div().Class("card-title h5").Text(title),
-			app.Div().Class("card-subtitle text-gray").Text(subTitle),
+			app.Div().Class("card-title h5").Body(title),
+			app.Range(subTitle).Slice(func(i int) app.UI{
+				return app.Div().Class("card-subtitle text-gray").Body(subTitle[i])
+			}),
 		),
 		app.Div().Class("card-body").Body(
 			body,

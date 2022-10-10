@@ -44,7 +44,14 @@ func Table[V any](m []V, class string) app.HTMLTable {
 	for _, v := range m {
 		entries := []app.UI{}
 		for _, j := range data {
-			entries = append(entries, app.Td().Style("border", "1px solid black").Text(getField(v, j)))
+			val := getField(v, j)
+			switch val.(type) {
+				case app.UI:
+					entries = append(entries, app.Td().Style("border", "1px solid black").Body(val.(app.UI)))
+				default:
+					entries = append(entries, app.Td().Style("border", "1px solid black").Text(val))
+			}
+
 		}
 		rows = append(rows, app.Tr().Body(entries...))
 	}
