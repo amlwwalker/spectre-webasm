@@ -1,11 +1,11 @@
 package components
 
 import (
+	"fmt"
 	"github.com/amlwwalker/spectre-webasm/pkg/markdown"
 	"github.com/amlwwalker/spectre-webasm/pkg/spectre/components"
 	"github.com/amlwwalker/spectre-webasm/pkg/spectre/layouts"
 	pages "github.com/amlwwalker/spectre-webasm/pkg/spectre/pages"
-	"fmt"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 
