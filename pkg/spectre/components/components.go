@@ -5,6 +5,7 @@ import (
 	"github.com/iancoleman/strcase"
 	"github.com/lithammer/shortuuid/v4"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
+	"github.com/rs/xid"
 	"strings"
 )
 func isFocus(path string) bool {
@@ -112,6 +113,26 @@ func FigureBadge(figureSrc string, dataBadge int, onClick func(ctx app.Context, 
 }
 
 
+func Radio(description []string, inline bool, onClick func(ctx app.Context, e app.Event)) app.HTMLDiv {
+	id := xid.New()
+	group := app.Div().Class("form-group")
+	buttons := []app.UI{}
+	for _, d := range description {
+		radioButton := app.Label().Class("form-radio")
+		if inline {
+
+			radioButton.Class("form-inline")
+		}
+		radioButton.Body(
+		app.Input().Type("radio").Name(id.String()).OnClick(onClick),
+		app.I().Class("form-icon"),
+		app.Span().Text(d),
+		)
+		buttons = append(buttons, radioButton)
+	}
+	group.Body(buttons...)
+	return group
+}
 // Card
 /*
 <div class="card">

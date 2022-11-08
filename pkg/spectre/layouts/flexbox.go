@@ -8,13 +8,23 @@ func FlexBox(width string, body ...app.UI) app.HTMLDiv {
 		app.Div().Class("columns").Body(body...),
 	)
 }
+// TwoColumn is a helper function forces two column content
+func TwoColumn(width string, body ...app.UI) app.HTMLDiv {
+	var wrappers []app.UI
+	for _, v := range body {
+		wrappers = append(wrappers, app.Div().Class("column col-6 col-xs-12").Body(v))
+	}
+	return FlexBox(width,
+		wrappers...,
+	)
+}
 // ThreeColumn is a helper function forces two column content
-func ThreeColumn(body ...app.UI) app.HTMLDiv {
+func ThreeColumn(width string, body ...app.UI) app.HTMLDiv {
 	var wrappers []app.UI
 	for _, v := range body {
 		wrappers = append(wrappers, app.Div().Class("column col-4 col-xs-12").Body(v))
 	}
-	return FlexBox("800px",
+	return FlexBox(width,
 		wrappers...,
 	)
 }
@@ -28,16 +38,7 @@ func FourColumn(body ...app.UI) app.HTMLDiv {
 		wrappers...,
 	)
 }
-// TwoColumn is a helper function forces two column content
-func TwoColumn(body ...app.UI) app.HTMLDiv {
-	var wrappers []app.UI
-	for _, v := range body {
-		wrappers = append(wrappers, app.Div().Class("column col-6 col-xs-12").Body(v))
-	}
-	return FlexBox("800px",
-		wrappers...,
-	)
-}
+
 
 func GaplessFlexBox(width string, body ...app.UI) app.HTMLDiv {
 	return FlexBox(width, body...).Class("col-gapless")

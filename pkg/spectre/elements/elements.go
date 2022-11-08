@@ -7,9 +7,12 @@ import (
 	"reflect"
 )
 
-func retrieveColumnNames[V any](m []V) []string {
+const tableTagName = "table"
+
+func retrieveColumnNames[V any](m []V) ([]string, []string) {
 	uniqueKeys := make(map[string]bool)
 	uniqueKeysArray := []string{}
+	uniqueTagsArray := []string{}
 	for _, k := range m {
 		t := reflect.TypeOf(k)
 		names := make([]string, t.NumField())
@@ -18,10 +21,15 @@ func retrieveColumnNames[V any](m []V) []string {
 			if ok := uniqueKeys[t.Field(i).Name]; !ok {
 				uniqueKeys[t.Field(i).Name] = true
 				uniqueKeysArray = append(uniqueKeysArray, t.Field(i).Name)
+				if t.Field(i).Tag.Get(tableTagName) != "" {
+					uniqueTagsArray = append(uniqueTagsArray, t.Field(i).Tag.Get(tableTagName))
+				} else {
+					uniqueTagsArray = append(uniqueTagsArray, t.Field(i).Name)
+				}
 			}
 		}
 	}
-	return uniqueKeysArray
+	return uniqueKeysArray, uniqueTagsArray
 }
 func getField(v any, field string) any {
 	value, err := reflections.GetField(v, field)
@@ -33,7 +41,7 @@ func getField(v any, field string) any {
 //Table converts a map of structs to a table
 func Table[V any](m []V, class string) app.HTMLTable {
 	// get all the keys
-	data := retrieveColumnNames(m)
+	data, tags := retrieveColumnNames(m)
 	//keys := maps.Keys(data)
 	//fmt.Printf("m %+v", m)
 	//values := maps.Values(data)
@@ -59,7 +67,7 @@ func Table[V any](m []V, class string) app.HTMLTable {
 		app.Tr().Body(
 			//for all of the values in the map
 			app.Range(data).Slice(func(j int) app.UI {
-				return app.Th().Class("text-center").Text(data[j])
+				return app.Th().Class("text-center").Text(tags[j])
 			}),
 		),
 	)
