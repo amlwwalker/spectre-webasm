@@ -1,18 +1,19 @@
 package components
 
 import (
+	"fmt"
 	"github.com/amlwwalker/spectre-webasm/pkg/markdown"
 	"github.com/amlwwalker/spectre-webasm/pkg/spectre/components"
 	"github.com/amlwwalker/spectre-webasm/pkg/spectre/layouts"
 	pages "github.com/amlwwalker/spectre-webasm/pkg/spectre/pages"
-	"fmt"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 
-//AvatarPage
+// AvatarPage
 type AvatarPage struct {
 	app.Compo
 }
+
 func (h *AvatarPage) Render() app.UI {
 	return pages.Page("Avatars", "Avatars are personal icons next to details or people", "web/documents/avatars.md",
 		layouts.TwoColumn(
@@ -24,7 +25,7 @@ func (h *AvatarPage) Render() app.UI {
 	)
 }
 
-//CardPage
+// CardPage
 type CardPage struct {
 	app.Compo
 }
@@ -64,6 +65,7 @@ func (h *BadgePage) Render() app.UI {
 		components.FigureBadge("https://picturepan2.github.io/spectre/img/avatar-3.png", 7, nil),
 	)
 }
+
 // AccordionPage
 type AccordionPage struct {
 	app.Compo
@@ -100,22 +102,24 @@ func (h *AccordionPage) Render() app.UI {
 		),
 	)
 }
+
 // ModalPage
 type ModalPage struct {
 	app.Compo
-	largeModalOpen bool
+	largeModalOpen  bool
 	mediumModalOpen bool
-	smallModalOpen bool
+	smallModalOpen  bool
 }
+
 // gettingStarted render method
 func (h *ModalPage) Render() app.UI {
 	lM := components.Modal{
-		Size:    "modal-lg",
-		ID:      "modal-id",
-		Title:   "A large modal",
-		Body:    []app.UI{app.Raw(
-markdown.InlineMarkdown(
-`This modal represents A large modal defined by the size attribute 
+		Size:  "modal-lg",
+		ID:    "modal-id",
+		Title: "A large modal",
+		Body: []app.UI{app.Raw(
+			markdown.InlineMarkdown(
+				`This modal represents A large modal defined by the size attribute 
 <code>modal-lg</code>
 `))},
 		Footer:  []app.UI{app.Span().Text("large modal footer text")},
@@ -137,14 +141,14 @@ markdown.InlineMarkdown(
 		h.Update()
 	}
 	sM := components.Modal{
-		Size:    "modal-sm",
-		ID:      "modal-id",
-		Title:   "A small modal",
-		Body:    []app.UI{app.Raw(
+		Size:  "modal-sm",
+		ID:    "modal-id",
+		Title: "A small modal",
+		Body: []app.UI{app.Raw(
 			markdown.InlineMarkdown(
 				`This modal represents A large modal defined by the size attribute 
 <code>modal-sm</code>
-`))},		Footer:  []app.UI{app.Span().Text("small modal footer text")},
+`))}, Footer: []app.UI{app.Span().Text("small modal footer text")},
 		OnClose: nil,
 	}
 	sM.OnClose = func() {
@@ -164,7 +168,7 @@ markdown.InlineMarkdown(
 				components.AccordionMenu("getting-started", "Getting Started", []string{"Installation", "Custom Version", "Browser-Support"}),
 				components.AccordionMenu("elements", "Elements", []string{"Typography", "Tables", "Buttons", "Forms", "Icons.css", "Labels", "Code", "Media"}),
 				components.AccordionMenu("layouts", "Layouts", []string{"Flexbox grid", "Responsive", "Hero", "Navbar"}),
-				components.AccordionMenu("components", "Components", []string{"Accordions", "Avatars", "Badges", "Bars", "Breadcrumbs", "Cards", "Chips", "Empty States", "Menu", "Modals", "Nav", 				"Pagination", "Panels", "Popovers", "Steps", "Tabs", "Tiles", "Toasts", "Tooltips"}),
+				components.AccordionMenu("components", "Components", []string{"Accordions", "Avatars", "Badges", "Bars", "Breadcrumbs", "Cards", "Chips", "Empty States", "Menu", "Modals", "Nav", "Pagination", "Panels", "Popovers", "Steps", "Tabs", "Tiles", "Toasts", "Tooltips"}),
 			), app.Div().Class("docs-content").Class("content").Body(
 				layouts.Hero("Modals", "Using Modals (webasm)"),
 
@@ -185,9 +189,11 @@ markdown.InlineMarkdown(
 		),
 	)
 }
+
 type TilePage struct {
 	app.Compo
 }
+
 func (h *TilePage) Render() app.UI {
 	return pages.Page("Tiles", "Tiles are repeatable or embeddable information blocks.", "/web/documents/tiles.md",
 		app.Div().Class("columns").Body(
@@ -203,6 +209,7 @@ type TabsPage struct {
 	app.Compo
 	activeTab string
 }
+
 func (h *TabsPage) OnMount(ctx app.Context) {
 	h.activeTab = "profile-tab"
 }
@@ -257,12 +264,13 @@ func (h *TabsPage) Render() app.UI {
 		),
 	)
 }
+
 type PanelPage struct {
 	app.Compo
 }
 
 func (h *PanelPage) Render() app.UI {
-	avengersTiles := []app.UI {
+	avengersTiles := []app.UI{
 		components.Tile(
 			"The Avengers",
 			"Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...",
@@ -280,7 +288,7 @@ func (h *PanelPage) Render() app.UI {
 			"https://picturepan2.github.io/spectre/img/avatar-1.png"),
 	}
 
-	bannerProfile := []app.UI {
+	bannerProfile := []app.UI{
 		components.Tile(
 			"Email",
 			"bruce.banner@hulk.com",

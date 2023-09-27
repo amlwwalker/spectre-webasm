@@ -1,6 +1,8 @@
 build:
 	GOARCH=wasm GOOS=js go build -o web/app.wasm
-	go build
+	cd web && npm run build
+	go build -o	go-app-tuts
 
 run: build
 	./go-app-tuts
+
