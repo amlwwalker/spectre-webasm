@@ -2,12 +2,12 @@ package markdown
 
 import (
 	"fmt"
-	"path/filepath"
-
+	custom_renderers "github.com/amlwwalker/spectre-webasm/pkg/markdown/custom-renderers"
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/parser"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 	"github.com/maxence-charriere/go-app/v9/pkg/ui"
+	"path/filepath"
 )
 
 type markdownDoc struct {
@@ -61,7 +61,9 @@ func (d *markdownDoc) highlightCode(ctx app.Context) {
 func parseMarkdown(md []byte) []byte {
 	extensions := parser.CommonExtensions | parser.AutoHeadingIDs
 	parser := parser.NewWithExtensions(extensions)
-	return markdown.ToHTML(md, parser, nil)
+	renderer := custom_renderers.NewCustomRenderer("ComponentA")
+
+	return markdown.ToHTML(md, parser, renderer)
 }
 
 type remoteMarkdownDoc struct {
@@ -111,10 +113,18 @@ func (d *remoteMarkdownDoc) load(ctx app.Context) {
 			//fmt.Println(d.md.Data)
 			//ctx.Defer(scrollTo)
 			//Window().ScrollToID(id)
+			//app.Window().Call("mountReactComponents") // <-- Add this line here.
+			// Create a new event
+			event := app.Window().Get("Event").New("markdownUpdated")
+
+			// Dispatch the event on the document
+			app.Window().Get("document").Call("dispatchEvent", event)
+
 		}).
 		Value(&d.md)
 
 	ctx.NewAction(GetMarkdown, app.T("path", d.Isrc))
+
 }
 
 func (d *remoteMarkdownDoc) Render() app.UI {

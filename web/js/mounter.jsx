@@ -31,5 +31,12 @@ window.mountReactComponents = function() {
     });
 };
 
+document.addEventListener('markdownUpdated', function() {
+    console.log("markdownUpdated event received");
+    setTimeout(() => {
+        window.mountReactComponents();
+    }, 100); //fixme this is not a solution
+});
+
 // Call the function once when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', window.mountReactComponents);

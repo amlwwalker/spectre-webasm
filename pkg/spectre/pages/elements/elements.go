@@ -2,13 +2,13 @@ package elements
 
 import (
 	"github.com/amlwwalker/spectre-webasm/pkg/spectre/components"
-	"github.com/amlwwalker/spectre-webasm/pkg/spectre/elements"
 	"github.com/amlwwalker/spectre-webasm/pkg/spectre/layouts"
 	pages "github.com/amlwwalker/spectre-webasm/pkg/spectre/pages"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 
 var stateName = "button-click"
+
 // ButtonPage
 type ButtonPage struct {
 	app.Compo
@@ -23,7 +23,7 @@ func (h *ButtonPage) Render() app.UI {
 		app.Window().Call("alert", "setting state now...")
 		ctx.SetState(stateName, "button was clicked. State was obsererved and monitored.")
 	}
-	return pages.Page("Buttons", "Buttons submit forms, or execute actions", "/web/documents/buttons.md",
+	return pages.NewPage("Buttons", "Buttons submit forms, or execute actions", "/documents/buttons.md",
 		layouts.FlexBox("75%",
 			app.Div().Class("column").Body(components.Button("block button", "btn btn-block", onClick)),
 			app.Div().Class("column").Body(components.Button("primary button", "btn  btn-primary", onClick)),
@@ -38,35 +38,5 @@ func (h *ButtonPage) Render() app.UI {
 				app.P().Text(h.stateValue),
 			),
 		),
-	)
-}
-// TablePage
-type TablePage struct {
-	app.Compo
-}
-
-func (h *TablePage) Render() app.UI {
-	t := []any{
-		struct{
-			A string
-			B string
-			C string
-		}{
-			A: "a",
-			B: "b",
-			C: "c1",
-		},
-		struct {
-			C string
-			D string
-			E string
-		}{
-			C: "c2",
-			D: "d",
-			E: "e",
-		},
-	}
-	return pages.Page("Tables", "Tables are used to display tabular data", "/web/documents/tables.md",
-		elements.Table(t, "table-striped"),
 	)
 }

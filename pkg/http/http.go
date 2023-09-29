@@ -20,26 +20,26 @@ func Get(ctx app.Context, path string) ([]byte, error) {
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return nil, errors.New("creating request failed").
-			Tag("path", path).
+			WithTag("path", path).
 			Wrap(err)
 	}
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, errors.New("getting document failed").
-			Tag("path", path).
+			WithTag("path", path).
 			Wrap(err)
 	}
 	defer res.Body.Close()
 
 	if res.StatusCode >= 400 {
-		return nil, errors.New(res.Status).Tag("path", path)
+		return nil, errors.New(res.Status).WithTag("path", path)
 	}
 
-	b, err := ioutil.ReadAll(res.Body)
+	b, err := ioutil.ReadAll(res.Body) //fix me - inefficient
 	if err != nil {
 		return nil, errors.New("reading document failed").
-			Tag("path", path).
+			WithTag("path", path).
 			Wrap(err)
 	}
 	return b, nil

@@ -7,6 +7,7 @@ import (
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 	"strings"
 )
+
 func isFocus(path string) bool {
 	fmt.Println("according menu ", path)
 	if strings.Contains(app.Window().URL().Path, path) {
@@ -18,19 +19,21 @@ func isFocus(path string) bool {
 func urlLink(str string) string {
 	return strcase.ToLowerCamel(str)
 }
+
 // Modal is a generic modal with a close handler
 type Modal struct {
 	app.Compo
-	Size string //Size is the size of the modal
-	ID           string   // HTML ID of the modal; must be unique across the page
-	Icon         string   // Class of the icon to use to the left of the title; may be empty
-	Title        string   // Title of the modal
-	Class        string   // Class to be applied to the modal's outmost component
-	Body         []app.UI // Body of the modal
-	Footer       []app.UI // Footer of the modal
+	Size   string   //Size is the size of the modal
+	ID     string   // HTML ID of the modal; must be unique across the page
+	Icon   string   // Class of the icon to use to the left of the title; may be empty
+	Title  string   // Title of the modal
+	Class  string   // Class to be applied to the modal's outmost component
+	Body   []app.UI // Body of the modal
+	Footer []app.UI // Footer of the modal
 	//DisableFocus bool     // Disable auto-focusing the modal; useful if a child component, i.e. an input should be focused instead
 	OnClose func() // Handler to call when closing/cancelling the modal
 }
+
 /*
 <div class="modal active" id="modal-id">
   <a href="#close" class="modal-overlay" aria-label="Close"></a>
@@ -49,14 +52,14 @@ type Modal struct {
     </div>
   </div>
 </div>
- */
+*/
 
 func (m *Modal) Render() app.UI {
 	modal := app.Div().Class("modal active " + m.Size + " " + m.Class).OnClick(func(ctx app.Context, e app.Event) {
 		m.OnClose()
 	})
 	modal.ID(m.ID).Body(
-			app.A().Class("modal-overlay").Aria("label", "Close"),
+		app.A().Class("modal-overlay").Aria("label", "Close"),
 		app.Div().Class("modal-container").Body(
 			app.Div().Class("modal-header").Body(
 				app.A().Class("btn btn-clear float-right").Aria("label", "Close"),
@@ -72,13 +75,14 @@ func (m *Modal) Render() app.UI {
 	)
 	return modal
 }
+
 //Avatar
 /*
 <!-- Show initals when avatar image is unavailable or not fully loaded -->
 <figure class="avatar avatar-xl" data-initial="YZ" style="background-color: #5755d9;">
   <img src="img/avatar-1.png" alt="...">
 </figure>
- */
+*/
 func Avatar(size, src, initials, color string) app.HTMLFigure {
 	return app.Figure().Class("avatar").Class(size).Attr("data-initial", initials).Style("background-color", color).Body(
 		app.If(src != "",
@@ -111,7 +115,6 @@ func FigureBadge(figureSrc string, dataBadge int, onClick func(ctx app.Context, 
 	return figure
 }
 
-
 // Card
 /*
 <div class="card">
@@ -129,7 +132,7 @@ func FigureBadge(figureSrc string, dataBadge int, onClick func(ctx app.Context, 
     <button class="btn btn-primary">...</button>
   </div>
 </div>
- */
+*/
 func Card(title, subTitle, src string, body app.UI, footer app.UI) app.HTMLDiv {
 	return app.Div().Class("card").Body(
 		app.Div().Class("card-image").Body(
@@ -156,19 +159,20 @@ func Card(title, subTitle, src string, body app.UI, footer app.UI) app.HTMLDiv {
 </div>
 */
 func Toast(message, toastType string, active, close bool) app.HTMLDiv {
-	toast := app.Div().Class("toast toast-"+toastType)
+	toast := app.Div().Class("toast toast-" + toastType)
 	if !active {
 		toast.Class("d-none")
 	}
 	var body []app.UI
 	if close {
-			body = append(body, app.Button().Class("btn btn-clear float-right"))
+		body = append(body, app.Button().Class("btn btn-clear float-right"))
 	}
 	body = append(body, app.Span().Text(message))
 	toast.Body(body...)
 	//toast.Text(message)
 	return toast
 }
+
 // Steps
 /*
 <ul class="step">ds
@@ -185,13 +189,13 @@ func Toast(message, toastType string, active, close bool) app.HTMLDiv {
     <a href="#" class="tooltip" data-tooltip="Step 4">Step 4</a>
   </li>
 </ul>
- */
+*/
 func Steps() app.HTMLDiv {
 	fmt.Println("app.Window().URL().Fragment", app.Window().URL().Fragment)
 	return app.Div().Class("docs-demo columns").Body(
 		app.Div().Class("column col-12").Body(
 			app.Ul().Class("step").Body(
-				app.If( app.Window().URL().Fragment == "step1",
+				app.If(app.Window().URL().Fragment == "step1",
 					app.Li().Class("step-item active").Body(
 						app.A().Class("tooltip").Href("#step1").Attr("data-tooltip", "Step 1 Tooltip"),
 					),
@@ -200,7 +204,7 @@ func Steps() app.HTMLDiv {
 						app.A().Class("tooltip").Href("#step1").Attr("data-tooltip", "Step 1 Tooltip"),
 					),
 				),
-				app.If( app.Window().URL().Fragment == "step2",
+				app.If(app.Window().URL().Fragment == "step2",
 					app.Li().Class("step-item active").Body(
 						app.A().Class("tooltip").Href("#step2").Attr("data-tooltip", "Step 2 Tooltip"),
 					),
@@ -209,7 +213,7 @@ func Steps() app.HTMLDiv {
 						app.A().Class("tooltip").Href("#step2").Attr("data-tooltip", "Step 2 Tooltip"),
 					),
 				),
-				app.If( app.Window().URL().Fragment == "step3",
+				app.If(app.Window().URL().Fragment == "step3",
 					app.Li().Class("step-item active").Body(
 						app.A().Class("tooltip").Href("#step3").Attr("data-tooltip", "Step 3 Tooltip"),
 					),
@@ -222,6 +226,7 @@ func Steps() app.HTMLDiv {
 		),
 	)
 }
+
 //Nav
 /*
 <ul class="nav">
@@ -252,7 +257,7 @@ func Steps() app.HTMLDiv {
     <a href="#">Utilities</a>
   </li>
 </ul>
- */
+*/
 func Nav() app.HTMLUl {
 	return app.Ul().Class("docs-nav").Class("nav").Body(
 		app.Li().Class("nav-item").Body(
@@ -292,27 +297,32 @@ func Nav() app.HTMLUl {
 
 func Accordion(menus ...app.UI) app.HTMLDiv {
 	return app.Div().Class("accordion-container").Body(
-		menus...
+		menus...,
 	)
 }
 
 func AccordionMenu(pathID, menuTitle string, menuElements []string) app.UI {
 	uuid := shortuuid.New()
 	return app.Div().Class("accordion").Body(
-		app.Input().ID("accordion-"+ pathID + "-" + uuid).Type("checkbox").Name("docs-accordion-checkbox").Hidden(true).Checked(isFocus(pathID)),
-		app.Label().Class("accordion header c-hand").For("accordion-"+ pathID + "-" + uuid).Text(menuTitle),
+		app.Input().ID("accordion-"+pathID+"-"+uuid).Type("checkbox").Name("docs-accordion-checkbox").Hidden(true).Checked(isFocus(pathID)),
+		app.Label().Class("accordion header c-hand").For("accordion-"+pathID+"-"+uuid).Text(menuTitle),
 		app.Div().Class("accordion-body").Body(
 			app.Ul().Class("menu menu-nav").Body(
 				app.Range(menuElements).Slice(func(i int) app.UI {
 					return app.Li().Class("menu-item").Body(
-						app.A().Href("/"+ pathID +"/"+ urlLink(menuElements[i])).Text(menuElements[i]),
+						app.A().Href("/" + pathID + "/" + urlLink(menuElements[i])).Text(menuElements[i]),
 					)
 				}),
 			),
 		),
 	)
 }
-
+func CustomComponent(componentName string, props map[string]interface{}) app.UI {
+	return &ReactPlaceholder{
+		ComponentName: componentName,
+		Props:         props,
+	}
+}
 func Panel(titleContent, subtitleContent, navContent, bodyContent, footerContent app.UI) app.HTMLDiv {
 	return app.Div().Class("panel").Body(
 		app.Div().Class("panel-header").Body(
@@ -351,13 +361,13 @@ func Panel(titleContent, subtitleContent, navContent, bodyContent, footerContent
     <button class="btn btn-primary">Join</button>
   </div>
 </div>
- */
+*/
 func Tile(title, subTitle, buttonText, imageSrc string) app.HTMLDiv {
 	return app.Div().Class("tile").Body(
 		app.If(imageSrc != "",
 			app.Div().Class("tile-icon").Body(
-			ImageFigure(imageSrc),
-		)),
+				ImageFigure(imageSrc),
+			)),
 		app.Div().Class("tile-content").Body(
 			app.P().Class("tile-title").Class("h4").Text(title),
 			app.P().Class("tile-subtitle").Text(subTitle),
@@ -384,10 +394,10 @@ func Tile(title, subTitle, buttonText, imageSrc string) app.HTMLDiv {
     <a href="#">Connect</a>
   </li>
 </ul>
- */
+*/
 func Tabs(tabs ...app.UI) app.HTMLUl {
 	return app.Ul().Class("tab tab-block").Body(
-		tabs...
+		tabs...,
 	)
 }
 
@@ -425,7 +435,7 @@ func Breadcrumbs(content []app.UI) app.HTMLUl {
   Yan Zhu
   <a href="#" class="btn btn-clear" aria-label="Close" role="button"></a>
 </div>
- */
+*/
 func Chip(text, size, src string, close bool) app.HTMLSpan {
 	return app.Span().Class("chip").Body(
 		app.If(src != "", app.Img().Src(src).Class("avatar").Class(size)),
@@ -433,7 +443,6 @@ func Chip(text, size, src string, close bool) app.HTMLSpan {
 		app.If(close, app.A().Href("#").Class("btn btn-clear").Aria("label", "Close").Attr("role", "button")),
 	)
 }
-
 
 // EmptyState
 /*
@@ -447,7 +456,7 @@ func Chip(text, size, src string, close bool) app.HTMLSpan {
     <button class="btn btn-primary">Send a message</button>
   </div>
 </div>
- */
+*/
 func EmptyState(icon, title, subTitle, buttonClass, buttonText string, onClick func(ctx app.Context, e app.Event)) app.HTMLDiv {
 	return app.Div().Class("empty").Body(
 		app.Div().Class("empty-icon").Body(
