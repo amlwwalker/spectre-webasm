@@ -15,7 +15,7 @@ import (
 <div class="column col-1">col-1</div>
 </div>
 </div>
- */
+*/
 func Dashboard(nav app.UI) app.HTMLDiv {
 	return FlexBox("800px",
 		app.Div().Class("column col-3").Text("text"),
@@ -41,7 +41,7 @@ func Dashboard(nav app.UI) app.HTMLDiv {
     </div>
   </section>
 </header>
- */
+*/
 func NavBar() app.HTMLHeader {
 	return app.Header().Class("navbar").Body(
 		app.Section().Class("navbar-section").Body(
@@ -79,7 +79,7 @@ func NavBar() app.HTMLHeader {
     <!-- off-screen content -->
   </div>
 </div>
- */
+*/
 func SideBar(sidebarContent, bodyContent app.UI) app.HTMLDiv {
 	return FlexBox("100%",
 		app.Div().Class("docs-container").Class("off-canvas").Class("off-canvas-sidebar-show").Style("min-height", "100vh;").Body(
@@ -107,7 +107,7 @@ func SideBar(sidebarContent, bodyContent app.UI) app.HTMLDiv {
     <p>This is a hero example</p>
   </div>
 </div>
- */
+*/
 func Hero(title, description string) app.HTMLDiv {
 	return app.Div().Class("hero bg-gray").Body(
 		app.Div().Class("hero-title").Body(
@@ -125,4 +125,3 @@ func MediaHero(title, description string, src string) app.HTMLDiv {
 		),
 	)
 }
-
