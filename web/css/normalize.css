@@ -1,0 +1,10 @@
+body > .normalize {
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    outline: none;
+}

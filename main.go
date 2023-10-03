@@ -240,6 +240,7 @@ func main() {
 			"/web/css/spectre/spectre.min.css", // Loads hello.css file.
 			"/web/css/spectre/spectre-exp.min.css",
 			"/web/css/spectre/spectre-icons.min.css",
+			"/web/css/normalize.css",
 			"/web/css/docs.css",
 			"/web/css/popover-styles.css",
 			"/web/css/prism.css",

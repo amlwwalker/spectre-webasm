@@ -7,10 +7,18 @@ import (
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 
-// CardPage
+//
+//// CardPage
 //type CardPage struct {
 //	app.Compo
 //}
+//
+//func (h *CardPage) Render() app.UI {
+//	app.Div().Attr()
+//	app.A().Body()
+//	app.Section().Body()
+//}
+
 //
 //func (h *CardPage) Render() app.UI {
 //	return pages.NewPage("Cards", "Cards hold succinct information related to A specific topic", "/documents/cards.md",
